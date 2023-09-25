@@ -35,7 +35,7 @@ router.post("/login" ,async ()=>{
         if(!checkforpassword){
             return res.json("invalid credentials");
         }
- const token =jwt.sign({userId:user[0]._id},process.env.securityKey)
+ const token =jwt.sign({userId:user[0]._id},process.env.secret)
  res.json({email,token})
 
     } catch (error) 

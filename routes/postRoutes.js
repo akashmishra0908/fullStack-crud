@@ -10,7 +10,7 @@ const middleware=async(req,res,next)=>{
         return res.status(401).json({msg:"No token provided"});
     }
     try {
-        let decoded=jwt.verify(token,process.env.securityKey)
+        let decoded=jwt.verify(token,process.env.secret)
         req.userId=decoded.userId
         next();
     } catch (error) {
