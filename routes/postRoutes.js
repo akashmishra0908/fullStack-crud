@@ -78,3 +78,27 @@ router.patch("/update/:id",middleware, async(req,res)=>{
         res.status(400).json({msg:"Update-Error"})
     }
 })
+
+
+router.delete("/delete/:id",middleware, async(req,res)=>{
+
+    try {
+        const post=await Post.findById(req.params.id);
+        if(!post){
+            res.send("post not there");
+        }
+        if(post.author.toString()!==req.userId) {
+            res.send("Not Authorised");
+        }
+        const DeletePost=await Post.findByIdAndDelete(req.params.id)
+        res.status(200).send("Post deleted");
+    } catch (error) {
+        res.status(400).json({msg:"Deleted-Error"})
+    }
+})
+
+
+
+
+
+
