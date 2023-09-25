@@ -99,6 +99,6 @@ router.delete("/delete/:id",middleware, async(req,res)=>{
 
 
 
-
+module.exports=router;
 
 
