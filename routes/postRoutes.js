@@ -37,3 +37,28 @@ res.status(200).json({post})
     res.status(400).json({msg:"Error"})
 }
 })
+
+router.get("/",middleware, async(req,res)=>{
+    try {
+        const {device,page}=req.query;
+        let skip;
+        if(page){
+            skip=(page-1)*3
+        }
+        
+    else {
+        skip=0;
+    }
+    let query={author:req.userId}
+    if(device){
+        query.device=device;
+    }
+const postData=await Post.find(query).skip(skip).limit(3);
+res.status(200).json(postData);
+
+    } catch (error) {
+        res.status(400).json({msg:"Error"});
+    }
+})
+
+
