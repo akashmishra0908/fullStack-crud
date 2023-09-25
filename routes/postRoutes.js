@@ -15,6 +15,25 @@ const middleware=async(req,res,next)=>{
         next();
     } catch (error) {
         res.status(401).json({msg:"Authorization denied. Invaliad token"});
-        
+
     }
 }
+
+
+router.post("/create",middleware,async(req,res)=>{
+try {
+    let {title,body,device}=re.body;
+    const obj={
+        title,
+        body,
+        device,
+        author:req.userId
+    }
+const post=await Post.create(obj);
+res.status(200).json({post})
+
+
+} catch (error) {
+    res.status(400).json({msg:"Error"})
+}
+})
