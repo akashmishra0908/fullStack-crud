@@ -4,6 +4,11 @@ require("dotenv").config();
 
 const app=express();
 app.use(express.json());
+const userRouter=require("./routes/userRoutes");
+const postRouter=require("./routes/postRoutes");
+ app.use("/user",userRouter);
+ app.use("/post",postRouter);
+
 
 app.listen(8080,async()=>{
     try {
